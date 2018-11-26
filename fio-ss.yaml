@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: fio
+spec:
+  selector:
+    matchLabels:
+      app: fio
+  serviceName: "fio"
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: fio
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: fio
+        image: satchpx/fio-tester:latest
+        volumeMounts:
+        - name: mnt
+          mountPath: /mnt
+  volumeClaimTemplates:
+  - metadata:
+      name: mnt
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "portworx-sc-repl2"
+      resources:
+        requests:
+          storage: 50Gi
