@@ -28,4 +28,4 @@ spec:
       storageClassName: "portworx-sc-repl2"
       resources:
         requests:
-          storage: 50Gi
+          storage: 20Gi
