@@ -5,3 +5,4 @@
  provisioner: kubernetes.io/portworx-volume
  parameters:
    repl: "2"
+   snap_schedule: periodic=30,3
