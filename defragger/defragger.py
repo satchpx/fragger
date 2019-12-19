@@ -121,12 +121,20 @@ def evaluate_usage(mountpath, verbose=False):
     datapart_used_pct=float(100 * float(data_used) / float(data_size))
     metapart_used_pct=float(100 * float(meta_used) / float(meta_size))
 
-    logger.info("Allocation is {0:.2f}% of Size".format(device_alloc_pct))
-    logger.info("FS free: {0:.2f}".format(float(free) / MB) + "MB Expected: {0:.2f}".format(float(free_expected) / MB) + "MB")
-    logger.info("Free delta is: " + "{0:.2f}".format(delta)  + "MB (" + "{0:.2f}%".format(float(delta_pct)) + ")")
-    logger.info("Overall used is {0:.2f}% of allocation".format(total_used_pct))
-    logger.info("Data partition used is {0:.2f}% of allocation".format(datapart_used_pct))
-    logger.info("Metadata partition used is {0:.2f}% of allocation".format(metapart_used_pct))
+    if verbose is True:
+        print("Allocation is {0:.2f}% of Size".format(device_alloc_pct))
+        print("FS free: {0:.2f}".format(float(free) / MB) + "MB Expected: {0:.2f}".format(float(free_expected) / MB) + "MB")
+        print("Free delta is: " + "{0:.2f}".format(delta)  + "MB (" + "{0:.2f}%".format(float(delta_pct)) + ")")
+        print("Overall used is {0:.2f}% of allocation".format(total_used_pct))
+        print("Data partition used is {0:.2f}% of allocation".format(datapart_used_pct))
+        print("Metadata partition used is {0:.2f}% of allocation".format(metapart_used_pct))
+    else:        
+        logger.info("Allocation is {0:.2f}% of Size".format(device_alloc_pct))
+        logger.info("FS free: {0:.2f}".format(float(free) / MB) + "MB Expected: {0:.2f}".format(float(free_expected) / MB) + "MB")
+        logger.info("Free delta is: " + "{0:.2f}".format(delta)  + "MB (" + "{0:.2f}%".format(float(delta_pct)) + ")")
+        logger.info("Overall used is {0:.2f}% of allocation".format(total_used_pct))
+        logger.info("Data partition used is {0:.2f}% of allocation".format(datapart_used_pct))
+        logger.info("Metadata partition used is {0:.2f}% of allocation".format(metapart_used_pct))
 
     return device_alloc_pct, (100 * float(dev_used) / float(dev_alloc))
 
