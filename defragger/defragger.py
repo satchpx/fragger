@@ -53,7 +53,7 @@ def cleanup(mountpath):
         return
 
 
-def evaluate_usage(mountpath):
+def evaluate_usage(mountpath, verbose=False):
     dev_size=0
     dev_alloc=0
     dev_used=0
@@ -98,7 +98,7 @@ def evaluate_usage(mountpath):
         if not free and re.match('^\s*Free ', line):
             free=re.sub('[^0-9]', '', line.split()[-1])
 
-    if verbose:
+    if verbose is True:
         print ("dev_size ", dev_size)
         print ("dev_alloc", dev_alloc)
         print ("dev_used ", dev_used)
@@ -139,6 +139,7 @@ def parse_args():
     parser.add_argument('--sender', help='Sender email address')
     parser.add_argument('--receiver', help='Receiver email address')
     parser.add_argument('--smtpserver', help='SMTP server address')
+    parser.add_argument('--dryrun', help='Do a dryrun to check current state only')
     return parser.parse_args()
 
 
@@ -170,6 +171,9 @@ def main():
 
     if args.cleanup is True:
         cleanup(mountpath)
+        sys.exit(0)
+    if args.dryrun is True:
+        evaluate_usage(mountpath,True)
         sys.exit(0)
 
     if args.forcefree is True:
