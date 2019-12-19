@@ -139,7 +139,7 @@ def parse_args():
     parser.add_argument('--sender', help='Sender email address')
     parser.add_argument('--receiver', help='Receiver email address')
     parser.add_argument('--smtpserver', help='SMTP server address')
-    parser.add_argument('--dryrun', help='Do a dryrun to check current state only')
+    parser.add_argument('--dryrun', type=bool, help='Do a dryrun to check current state only', default=False)
     return parser.parse_args()
 
 
