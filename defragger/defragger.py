@@ -53,7 +53,7 @@ def cleanup(mountpath):
         return
 
 
-def evaluate_usage(mountpath, verbose=False):
+def evaluate_usage(mountpath, dryrun=False):
     dev_size=0
     dev_alloc=0
     dev_used=0
@@ -121,7 +121,7 @@ def evaluate_usage(mountpath, verbose=False):
     datapart_used_pct=float(100 * float(data_used) / float(data_size))
     metapart_used_pct=float(100 * float(meta_used) / float(meta_size))
 
-    if verbose is True:
+    if dryrun is True:
         print("Allocation is {0:.2f}% of Size".format(device_alloc_pct))
         print("FS free: {0:.2f}".format(float(free) / MB) + "MB Expected: {0:.2f}".format(float(free_expected) / MB) + "MB")
         print("Free delta is: " + "{0:.2f}".format(delta)  + "MB (" + "{0:.2f}%".format(float(delta_pct)) + ")")
