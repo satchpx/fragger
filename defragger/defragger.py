@@ -22,7 +22,7 @@ logger.setLevel(logging.INFO)
 #   mount_path: path to the btrfs mount
 #   cleanup: if provided stop any outstanding operation and exit
 
-verbose=0
+debug=False
 MB=float(1024*1024)
 
 # Temporarily set to always run rebalance
@@ -98,7 +98,7 @@ def evaluate_usage(mountpath, dryrun=False):
         if not free and re.match('^\s*Free ', line):
             free=re.sub('[^0-9]', '', line.split()[-1])
 
-    if verbose is True:
+    if debug is True:
         print ("dev_size ", dev_size)
         print ("dev_alloc", dev_alloc)
         print ("dev_used ", dev_used)
